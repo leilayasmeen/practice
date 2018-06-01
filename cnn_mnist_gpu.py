@@ -1,3 +1,4 @@
+
 #  Copyright 2016 The TensorFlow Authors. All Rights Reserved.
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,11 +21,15 @@ from __future__ import print_function
 import numpy as np
 import tensorflow as tf
 
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
 tf.logging.set_verbosity(tf.logging.INFO)
 
 gpu_config = tf.ConfigProto()
 gpu_config.gpu_options.visible_device_list = str(2)
 sess = tf.Session(config=gpu_config) 
+sess.run(tf.global_variables_initializer())
 
 def cnn_model_fn(features, labels, mode):
   """Model function for CNN."""
