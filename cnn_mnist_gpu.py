@@ -22,6 +22,10 @@ import tensorflow as tf
 
 tf.logging.set_verbosity(tf.logging.INFO)
 
+gpu_config = tf.ConfigProto()
+gpu_config.gpu_options.visible_device_list = str(2)
+sess = tf.Session(config=gpu_config) 
+
 def cnn_model_fn(features, labels, mode):
   """Model function for CNN."""
   # Input Layer
