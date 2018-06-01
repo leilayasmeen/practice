@@ -22,6 +22,9 @@ import tensorflow as tf
 
 tf.logging.set_verbosity(tf.logging.INFO)
 
+gpu_config = tf.ConfigProto()
+gpu_config.gpu_options.visible_device_list = str(2)
+sess = tf.Session(config=gpu_config) 
 
 def cnn_model_fn(features, labels, mode):
   """Model function for CNN."""
@@ -131,7 +134,7 @@ def main(unused_argv):
   # Log the values in the "Softmax" tensor with label "probabilities"
   tensors_to_log = {"probabilities": "softmax_tensor"}
   logging_hook = tf.train.LoggingTensorHook(
-      tensors=tensors_to_log, every_n_iter=50)
+      tensors=tensors_to_log, every_n_iter=1000)
 
   # Train the model
   train_input_fn = tf.estimator.inputs.numpy_input_fn(
